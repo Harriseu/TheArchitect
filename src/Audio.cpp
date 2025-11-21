@@ -5,7 +5,7 @@
  *
  * Note: SFML audio is optional. If not available, functions become no-ops.
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 
