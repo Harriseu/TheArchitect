@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+DigitalExodus
+*.o
+*.exe
+
+# Save files
+*.dat
+saves/
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# SFML runtime
+*.dll
