@@ -16,6 +16,15 @@
 #include <ctime>
 #include <sys/stat.h>
 
+// Cross-platform ctime_r/ctime_s wrapper
+#ifdef _WIN32
+#define SAFE_CTIME(time_ptr, buffer, size) ctime_s(buffer, size, time_ptr)
+#define SAFE_STRNCPY(dest, dest_size, src, count) strncpy_s(dest, dest_size, src, count)
+#else
+#define SAFE_CTIME(time_ptr, buffer, size) ctime_r(time_ptr, buffer)
+#define SAFE_STRNCPY(dest, dest_size, src, count) strncpy(dest, src, count)
+#endif
+
 /*******************************************************************************
  * SAVE/LOAD MANAGER IMPLEMENTATION
  ******************************************************************************/
@@ -85,13 +94,13 @@ bool SaveLoadManager::saveGame(const std::string& filename, Player* player,
     memset(&data, 0, sizeof(SaveData));
 
     // Step 2: Write signature and version
-    strncpy(data.signature, "DEXODUS", 7);
+    SAFE_STRNCPY(data.signature, sizeof(data.signature), "DEXODUS", 7);
     data.signature[7] = '\0';
     data.version = 1;
     data.saveTime = time(nullptr);
 
     // Step 3: Serialize player data
-    strncpy(data.playerName, player->getName().c_str(), 31);
+    SAFE_STRNCPY(data.playerName, sizeof(data.playerName), player->getName().c_str(), 31);
     data.playerName[31] = '\0';
     data.health = player->getHealth();
     data.maxHealth = player->getMaxHealth();
@@ -104,7 +113,7 @@ bool SaveLoadManager::saveGame(const std::string& filename, Player* player,
 
     // Current sector
     if (map != nullptr && map->getCurrentSector() != nullptr) {
-        strncpy(data.currentSector, map->getCurrentSector()->name.c_str(), 63);
+        SAFE_STRNCPY(data.currentSector, sizeof(data.currentSector), map->getCurrentSector()->name.c_str(), 63);
         data.currentSector[63] = '\0';
     }
 
@@ -114,7 +123,7 @@ bool SaveLoadManager::saveGame(const std::string& filename, Player* player,
         InventoryIterator* it = inventory->createIterator("all");
         while (it->hasNext() && data.inventoryCount < 50) {
             Item* item = it->next();
-            strncpy(data.inventoryCodes[data.inventoryCount], item->code.c_str(), 31);
+            SAFE_STRNCPY(data.inventoryCodes[data.inventoryCount], sizeof(data.inventoryCodes[data.inventoryCount]), item->code.c_str(), 31);
             data.inventoryCodes[data.inventoryCount][31] = '\0';
             data.inventoryQuantities[data.inventoryCount] = item->quantity;
             data.inventoryCount++;
@@ -129,7 +138,8 @@ bool SaveLoadManager::saveGame(const std::string& filename, Player* player,
         int count = 0;
         Ability** unlocked = abilities->getUnlockedAbilities(count);
         for (int i = 0; i < count && data.unlockedAbilityCount < 20; i++) {
-            strncpy(data.unlockedAbilities[data.unlockedAbilityCount],
+            SAFE_STRNCPY(data.unlockedAbilities[data.unlockedAbilityCount],
+                    sizeof(data.unlockedAbilities[data.unlockedAbilityCount]),
                     unlocked[i]->code.c_str(), 31);
             data.unlockedAbilities[data.unlockedAbilityCount][31] = '\0';
             data.unlockedAbilityCount++;
@@ -228,7 +238,7 @@ bool SaveLoadManager::loadGame(const std::string& filename, Player* player,
 
     // Display save time
     char timeBuffer[26];
-    ctime_r(&data.saveTime, timeBuffer);
+    SAFE_CTIME(&data.saveTime, timeBuffer, sizeof(timeBuffer));
     std::cout << "  Saved: " << timeBuffer;
 
     return true;
@@ -331,7 +341,7 @@ std::string SaveLoadManager::getSaveInfo(const std::string& filename) const {
     }
 
     char timeBuffer[26];
-    ctime_r(&data.saveTime, timeBuffer);
+    SAFE_CTIME(&data.saveTime, timeBuffer, sizeof(timeBuffer));
     timeBuffer[24] = '\0';  // Remove newline
 
     std::string info = std::string(data.playerName) + " - Level " +
