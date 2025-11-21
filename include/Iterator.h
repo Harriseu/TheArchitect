@@ -13,7 +13,7 @@
  * - Supports different traversal strategies (all, filtered, sorted)
  * - Client code doesn't need to know internal structure
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

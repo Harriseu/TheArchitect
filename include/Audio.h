@@ -11,7 +11,7 @@
  * Note: If SFML is not available, audio functions become no-ops
  * to allow the game to run without audio support.
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

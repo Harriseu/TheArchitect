@@ -12,7 +12,7 @@
  * Save File Format: Binary (.dat) for efficiency
  * Config File Format: Text (.ini) for user editing
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

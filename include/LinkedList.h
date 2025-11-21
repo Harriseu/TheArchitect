@@ -23,7 +23,7 @@
  * - Player must be able to return to previous areas
  * - Complex interconnections between sectors
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 
