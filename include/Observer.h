@@ -31,7 +31,7 @@
 
 // Forward declarations
 class Player;
-class SectorNode;
+struct SectorNode;
 
 /*******************************************************************************
  * CONCEPT: OBSERVER PATTERN - Observer Interface
