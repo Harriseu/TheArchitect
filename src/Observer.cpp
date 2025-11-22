@@ -204,6 +204,7 @@ std::string EventStorytellerModule::getName() const {
 }
 
 bool EventStorytellerModule::shouldTriggerEvent(Player* player) const {
+    (void)player;  // Suppress unused parameter warning - player used in extended implementation
     if (eventCooldown > 0) return false;
 
     // 30% base chance for event
@@ -283,6 +284,7 @@ bool EnvironmentStorytellerModule::isPlayerInCrisis(Player* player) const {
 }
 
 void EnvironmentStorytellerModule::adjustEnvironment(Player* player) {
+    (void)player;  // Suppress unused parameter warning - player used in extended implementation
     // Environment adjustments would affect sector danger levels, etc.
 }
 

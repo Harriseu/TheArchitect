@@ -30,9 +30,6 @@ struct Ability {
     std::string code;           // Unique identifier
     std::string name;           // Display name
     std::string description;    // What it does
-    int cost;                   // Skill points to unlock
-    int power;                  // Effect strength
-    bool unlocked;              // Has player unlocked this?
 
     enum class Type {
         COMBAT,                 // Damage abilities
@@ -40,6 +37,10 @@ struct Ability {
         HACKING,                // System manipulation
         SUPPORT                 // Utility abilities
     } type;
+
+    int cost;                   // Skill points to unlock
+    int power;                  // Effect strength
+    bool unlocked;              // Has player unlocked this?
 
     Ability();
     Ability(const std::string& code, const std::string& name,

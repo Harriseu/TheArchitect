@@ -59,9 +59,9 @@ public:
 class PlayerState {
 private:
     Observer** observers;       // Array of observer pointers
+    Player* player;             // Reference to player
     int observerCount;          // Number of attached observers
     int maxObservers;           // Maximum capacity
-    Player* player;             // Reference to player
 
 public:
     PlayerState(Player* player, int maxObs = 10);

@@ -32,8 +32,8 @@ class AbilityTree;
 class Entity {
 protected:
     std::string name;           // Entity's identifier
-    int health;                 // Current health points
     int maxHealth;              // Maximum health points
+    int health;                 // Current health points
     int attackPower;            // Base attack damage
     int defense;                // Damage reduction
     int speed;                  // Turn order priority
