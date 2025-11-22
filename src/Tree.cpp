@@ -14,8 +14,8 @@
  ******************************************************************************/
 
 Ability::Ability()
-    : code(""), name(""), description(""), cost(0), power(0),
-      unlocked(false), type(Type::COMBAT) {
+    : code(""), name(""), description(""), type(Type::COMBAT),
+      cost(0), power(0), unlocked(false) {
 }
 
 Ability::Ability(const std::string& code, const std::string& name,

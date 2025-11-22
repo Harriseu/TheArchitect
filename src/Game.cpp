@@ -215,6 +215,7 @@ void CombatSystem::playerDefend() {
 }
 
 void CombatSystem::playerUseAbility(const std::string& abilityCode, Entity* target) {
+    (void)target;  // Suppress unused parameter warning - target used in full implementation
     std::cout << "\n" << player->getName() << " uses ability: " << abilityCode << "!" << std::endl;
     // Ability effects would be implemented here
 }
