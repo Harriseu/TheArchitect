@@ -22,13 +22,11 @@ AudioManager::AudioManager()
       currentMusicTrack(""), activeSoundCount(0), audioPath("") {
 
 #ifdef SFML_AVAILABLE
-    // Initialize sound buffers and sounds
+    // Initialize sound buffers (sounds are unique_ptr, auto-initialized to nullptr)
     for (int i = 0; i < 10; i++) {
         soundBuffers[i] = nullptr;
     }
-    for (int i = 0; i < 5; i++) {
-        activeSounds[i] = nullptr;
-    }
+    // SFML 3.0: activeSounds are std::unique_ptr, no need to initialize
 #endif
 }
 
@@ -70,9 +68,9 @@ void AudioManager::shutdown() {
         soundBuffers[i] = nullptr;
     }
 
+    // SFML 3.0: activeSounds are unique_ptr, auto-cleanup via reset
     for (int i = 0; i < 5; i++) {
-        delete activeSounds[i];
-        activeSounds[i] = nullptr;
+        activeSounds[i].reset();
     }
 #endif
     std::cout << "[Audio] Audio system shutdown." << std::endl;
@@ -86,7 +84,8 @@ bool AudioManager::playMusic(const std::string& filename, bool loop) {
 #ifdef SFML_AVAILABLE
     std::string fullPath = audioPath + "/" + filename;
     if (backgroundMusic.openFromFile(fullPath)) {
-        backgroundMusic.setLoop(loop);
+        // SFML 3.0: setLoop() renamed to setLooping()
+        backgroundMusic.setLooping(loop);
         backgroundMusic.setVolume(musicVolume * masterVolume * 100);
         backgroundMusic.play();
         currentMusicTrack = filename;
@@ -127,7 +126,8 @@ void AudioManager::resumeMusic() {
 
 bool AudioManager::isMusicPlaying() const {
 #ifdef SFML_AVAILABLE
-    return backgroundMusic.getStatus() == sf::Music::Playing;
+    // SFML 3.0: Status is now a scoped enum (sf::SoundSource::Status)
+    return backgroundMusic.getStatus() == sf::SoundSource::Status::Playing;
 #else
     return !currentMusicTrack.empty();
 #endif
@@ -139,10 +139,11 @@ bool AudioManager::playSound(const std::string& filename) {
 
 #ifdef SFML_AVAILABLE
     // Find available sound slot
+    // SFML 3.0: Status is now a scoped enum (sf::SoundSource::Status)
     int slot = -1;
     for (int i = 0; i < 5; i++) {
-        if (activeSounds[i] == nullptr ||
-            activeSounds[i]->getStatus() == sf::Sound::Stopped) {
+        if (!activeSounds[i] ||
+            activeSounds[i]->getStatus() == sf::SoundSource::Status::Stopped) {
             slot = i;
             break;
         }
@@ -160,10 +161,9 @@ bool AudioManager::playSound(const std::string& filename) {
 
     std::string fullPath = audioPath + "/" + filename;
     if (soundBuffers[slot]->loadFromFile(fullPath)) {
-        if (activeSounds[slot] == nullptr) {
-            activeSounds[slot] = new sf::Sound();
-        }
-        activeSounds[slot]->setBuffer(*soundBuffers[slot]);
+        // SFML 3.0: Sound no longer has default constructor, must pass buffer
+        // Recreate sound with the loaded buffer
+        activeSounds[slot] = std::make_unique<sf::Sound>(*soundBuffers[slot]);
         activeSounds[slot]->setVolume(sfxVolume * masterVolume * 100);
         activeSounds[slot]->play();
         return true;
@@ -179,8 +179,9 @@ bool AudioManager::playSound(const std::string& filename) {
 
 void AudioManager::stopAllSounds() {
 #ifdef SFML_AVAILABLE
+    // SFML 3.0: activeSounds are unique_ptr
     for (int i = 0; i < 5; i++) {
-        if (activeSounds[i] != nullptr) {
+        if (activeSounds[i]) {
             activeSounds[i]->stop();
         }
     }

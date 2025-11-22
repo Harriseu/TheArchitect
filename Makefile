@@ -12,8 +12,9 @@
 # ******************************************************************************
 
 # Compiler settings
+# SFML 3.0 requires C++17 or later
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -g
+CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
 # Directories
 SRC_DIR = src
@@ -78,9 +79,9 @@ $(OBJECTS): $(wildcard $(INC_DIR)/*.h)
 # 1. Create a new Empty C++ Console Application
 # 2. Add all .h files from include/ to Header Files
 # 3. Add all .cpp files from src/ to Source Files
-# 4. Set C++ Language Standard to C++11 or later
-# 5. For SFML audio:
-#    a. Download SFML from https://www.sfml-dev.org/
+# 4. Set C++ Language Standard to C++17 or later (required for SFML 3.0)
+# 5. For SFML 3.0 audio:
+#    a. Download SFML 3.0 from https://www.sfml-dev.org/
 #    b. Add SFML include path to project includes
 #    c. Add SFML lib path to library directories
 #    d. Add sfml-audio.lib and sfml-system.lib to linker input

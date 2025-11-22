@@ -20,6 +20,7 @@
 
 #include <string>
 #include <iostream>
+#include <memory>
 
 // Check if SFML is available
 #ifdef SFML_AVAILABLE
@@ -40,7 +41,9 @@ private:
 #ifdef SFML_AVAILABLE
     sf::Music backgroundMusic;
     sf::SoundBuffer* soundBuffers[10];  // Preallocated buffers
-    sf::Sound* activeSounds[5];          // Active sound effects
+    // SFML 3.0: Sound no longer has default constructor, must be constructed with buffer
+    // Using unique_ptr for proper RAII with delayed initialization
+    std::unique_ptr<sf::Sound> activeSounds[5];  // Active sound effects
 #endif
 
     bool audioEnabled;
