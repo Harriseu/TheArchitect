@@ -11,6 +11,14 @@
 #include "../include/Entity.h"
 #include <ctime>
 #include <sstream>
+#include <cstring>
+
+// Cross-platform ctime_r/ctime_s wrapper
+#ifdef _WIN32
+#define SAFE_CTIME(time_ptr, buffer, size) ctime_s(buffer, size, time_ptr)
+#else
+#define SAFE_CTIME(time_ptr, buffer, size) ctime_r(time_ptr, buffer)
+#endif
 
 /*******************************************************************************
  * EVENT NODE IMPLEMENTATION (Singly Linked List)
