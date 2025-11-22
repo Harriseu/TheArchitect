@@ -3,7 +3,7 @@
  *
  * CONCEPT: Inheritance and Derived Classes, Polymorphism
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

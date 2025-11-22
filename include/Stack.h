@@ -13,7 +13,7 @@
  * - Queue would undo oldest first (wrong order)
  * - Simple operations: push, pop, peek
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

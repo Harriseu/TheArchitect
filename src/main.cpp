@@ -40,7 +40,7 @@
  * - File save/load system (SaveLoad.h/cpp)
  * - AI Storyteller influences 3+ aspects based on 2+ criteria
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  * Semester: 2025 S2
  ******************************************************************************/

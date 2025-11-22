@@ -3,7 +3,7 @@
  *
  * REQUIREMENT: File operations to keep track of Player Progress, Save/Load Game
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

@@ -13,7 +13,7 @@
  * - Flat list can't represent "requires X to unlock Y"
  * - Graph would be overkill for clear hierarchies
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

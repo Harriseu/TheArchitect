@@ -12,7 +12,7 @@
  * - Player needs instant item retrieval during combat
  * - O(1) average vs O(n) for array or O(log n) for BST
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 

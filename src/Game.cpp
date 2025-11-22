@@ -4,7 +4,7 @@
  * This file contains the main game loop, combat system, hacking minigame,
  * and all core gameplay functionality.
  *
- * Author: Digital Exodus Project
+ * Author: Alif Harriz Jeffery | 102782711
  * Course: COS30008 Data Structures and Patterns
  ******************************************************************************/
 
