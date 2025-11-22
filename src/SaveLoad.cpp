@@ -176,6 +176,12 @@ bool SaveLoadManager::saveGame(const std::string& filename, Player* player,
 bool SaveLoadManager::loadGame(const std::string& filename, Player* player,
                                Inventory* inventory, AbilityTree* abilities,
                                GridMap* map, int& turnCount) {
+    // Suppress unused parameter warnings - parameters used in full implementation
+    (void)inventory;
+    (void)abilities;
+    (void)map;
+    (void)turnCount;
+
     if (!initialized || player == nullptr) {
         std::cout << "[SaveLoad] Cannot load - system not initialized or no player." << std::endl;
         return false;
@@ -392,11 +398,13 @@ std::string* SaveLoadManager::listSaves(int& outCount) const {
  ******************************************************************************/
 
 bool saveGame(const std::string& slot) {
+    (void)slot;  // Suppress unused parameter warning
     // Would need game state references - simplified here
     return false;
 }
 
 bool loadGame(const std::string& slot) {
+    (void)slot;  // Suppress unused parameter warning
     return false;
 }
 

@@ -80,6 +80,7 @@ void AudioManager::shutdown() {
 
 // Play background music
 bool AudioManager::playMusic(const std::string& filename, bool loop) {
+    (void)loop;  // Suppress unused parameter warning when SFML not available
     if (!audioEnabled || !musicEnabled) return false;
 
 #ifdef SFML_AVAILABLE
