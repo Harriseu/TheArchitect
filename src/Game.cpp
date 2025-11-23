@@ -756,7 +756,7 @@ bool Game::loadGame(const std::string& slot) {
         initializeOverseer(player);
         overseer = g_Overseer;
         // Start the background music for the loaded game session
-        AudioManager::getInstance().playMusic("background_main.ogg", true); // Use the same filename
+        AudioManager::getInstance().playMusic("ambient_grid.wav", true); // Use the same filename
         // ======================
         currentState = GameState::PLAYING;
     }
