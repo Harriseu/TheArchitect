@@ -61,7 +61,6 @@ int main(int argc, char* argv[]) {
     // Suppress unused parameter warnings
     (void)argc;
     (void)argv;
-
     // Seed random number generator
     srand(static_cast<unsigned int>(time(nullptr)));
 

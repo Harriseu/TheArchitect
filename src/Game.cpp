@@ -587,7 +587,7 @@ void Game::displayGameScreen() const {
     std::cout << "  [L] Event Log" << std::endl;
     std::cout << "  [H] Hack Terminal (if available)" << std::endl;
     std::cout << "  [R] Rest" << std::endl;
-    std::cout << "  [S] Save Game" << std::endl;
+    std::cout << "  [V] Save Game" << std::endl;
     std::cout << "  [Q] Quit to Menu" << std::endl;
 }
 
@@ -622,6 +622,10 @@ void Game::newGame(const std::string& playerName) {
 
     // Log game start
     logEvent("Awakened in The Grid. The journey begins.", "SYSTEM");
+
+    // Start the background music for the game session
+    AudioManager::getInstance().playMusic("ambient_grid.wav", true); // Use your actual music filename
+    // ======================
 
     currentState = GameState::PLAYING;
 
@@ -751,6 +755,9 @@ bool Game::loadGame(const std::string& slot) {
     if (success) {
         initializeOverseer(player);
         overseer = g_Overseer;
+        // Start the background music for the loaded game session
+        AudioManager::getInstance().playMusic("background_main.ogg", true); // Use the same filename
+        // ======================
         currentState = GameState::PLAYING;
     }
 
@@ -863,7 +870,7 @@ void Game::handlePlaying() {
         interactWithTerminal();
     } else if (input == "r" || input == "R") {
         rest();
-    } else if (input == "s" || input == "S") {
+    } else if (input == "v" || input == "V") {
         setState(GameState::SAVE_MENU);
     } else if (input == "q" || input == "Q") {
         setState(GameState::MAIN_MENU);
