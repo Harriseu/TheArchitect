@@ -28,6 +28,8 @@ OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 # Output executable
 TARGET = DigitalExodus
 
+SFML_PATH = C:/SFML-3.0.0
+
 # Default build (without SFML)
 all: $(BUILD_DIR) $(TARGET)
 	@echo "Build complete: $(TARGET)"
@@ -36,7 +38,7 @@ all: $(BUILD_DIR) $(TARGET)
 # Build with SFML audio support
 sfml: CXXFLAGS += -DSFML_AVAILABLE
 sfml: LDFLAGS += -lsfml-audio -lsfml-system
-sfml: all
+sfml: clean all
 
 # Create build directory
 $(BUILD_DIR):
